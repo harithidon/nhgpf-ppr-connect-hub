@@ -1,9 +1,9 @@
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Users, Award, Calendar, Mail, Home, Images, Contact } from "lucide-react";
+import { Users, Award, Home } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
+import Navigation from "@/components/Navigation";
 import HeroCarousel from "@/components/HeroCarousel";
 import StatsSection from "@/components/StatsSection";
 import FeaturedMembers from "@/components/FeaturedMembers";
@@ -11,69 +11,12 @@ import LatestNews from "@/components/LatestNews";
 import PartnersSection from "@/components/PartnersSection";
 
 const Index = () => {
+  const { t } = useLanguage();
+
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
-      <nav className="bg-blue-900 text-white shadow-lg sticky top-0 z-50">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center space-x-4">
-              <img src="/placeholder.svg" alt="NHGPF Logo" className="h-10 w-10" />
-              <div>
-                <h1 className="font-bold text-lg">NHGPF</h1>
-                <p className="text-xs text-blue-200">National Humanity Global Peace Federation</p>
-              </div>
-            </div>
-            
-            <div className="hidden md:flex space-x-6">
-              <Link to="/" className="hover:text-yellow-300 transition-colors">Home</Link>
-              <div className="relative group">
-                <button className="hover:text-yellow-300 transition-colors">About Us ▾</button>
-                <div className="absolute top-full left-0 bg-white text-black shadow-lg rounded mt-1 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
-                  <Link to="/about" className="block px-4 py-2 hover:bg-blue-50">Our Vision</Link>
-                  <Link to="/founder" className="block px-4 py-2 hover:bg-blue-50">Founder</Link>
-                  <Link to="/ppr" className="block px-4 py-2 hover:bg-blue-50">PPR</Link>
-                </div>
-              </div>
-              <Link to="/events" className="hover:text-yellow-300 transition-colors">Events</Link>
-              <Link to="/gallery" className="hover:text-yellow-300 transition-colors">Gallery</Link>
-              <Link to="/doctorate-holders" className="hover:text-yellow-300 transition-colors">Doctorate Holders</Link>
-              <div className="relative group">
-                <button className="hover:text-yellow-300 transition-colors">Awards ▾</button>
-                <div className="absolute top-full left-0 bg-white text-black shadow-lg rounded mt-1 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
-                  <Link to="/awardees" className="block px-4 py-2 hover:bg-blue-50">Awardees</Link>
-                  <Link to="/apply-award" className="block px-4 py-2 hover:bg-blue-50">Apply for Award</Link>
-                </div>
-              </div>
-              <div className="relative group">
-                <button className="hover:text-yellow-300 transition-colors">Members ▾</button>
-                <div className="absolute top-full left-0 bg-white text-black shadow-lg rounded mt-1 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
-                  <Link to="/nhgpf-members" className="block px-4 py-2 hover:bg-blue-50">NHGPF Members</Link>
-                  <Link to="/ppr-members" className="block px-4 py-2 hover:bg-blue-50">PPR Members</Link>
-                </div>
-              </div>
-              <div className="relative group">
-                <button className="hover:text-yellow-300 transition-colors">Apply ▾</button>
-                <div className="absolute top-full left-0 bg-white text-black shadow-lg rounded mt-1 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
-                  <Link to="/apply-doctorate" className="block px-4 py-2 hover:bg-blue-50">Apply for Doctorate</Link>
-                  <Link to="/apply-award" className="block px-4 py-2 hover:bg-blue-50">Apply for Award</Link>
-                </div>
-              </div>
-              <Link to="/tieups" className="hover:text-yellow-300 transition-colors">Tie-ups</Link>
-              <Link to="/contact" className="hover:text-yellow-300 transition-colors">Contact Us</Link>
-            </div>
-
-            <div className="flex space-x-2">
-              <Button variant="outline" className="text-blue-900 border-yellow-400 hover:bg-yellow-400">
-                <Link to="/apply-doctorate">Apply for Doctorate</Link>
-              </Button>
-              <Button className="bg-yellow-500 hover:bg-yellow-600 text-blue-900">
-                <Link to="/donate">Donate</Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navigation />
 
       {/* Latest News Ticker */}
       <LatestNews />
@@ -84,31 +27,40 @@ const Index = () => {
       {/* Statistics Section */}
       <StatsSection />
 
-      {/* Call to Action Section */}
-      <section className="bg-gradient-to-r from-blue-900 to-blue-800 text-white py-16">
+      {/* Call to Action Section - Enhanced Responsiveness */}
+      <section className="bg-gradient-to-r from-blue-900 to-blue-800 text-white py-12 md:py-16">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold mb-4">Join Our Mission for Global Peace</h2>
-          <p className="text-xl mb-8 max-w-3xl mx-auto">
-            Together we can build stronger communities through police-public cooperation, 
-            education, and humanitarian services.
+          <h2 className="text-2xl md:text-4xl font-bold mb-4 leading-tight">
+            {t('hero.join_mission')}
+          </h2>
+          <p className="text-lg md:text-xl mb-6 md:mb-8 max-w-3xl mx-auto leading-relaxed">
+            {t('hero.subtitle')}
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Button size="lg" className="bg-yellow-500 hover:bg-yellow-600 text-blue-900">
+          <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 md:gap-4 max-w-4xl mx-auto">
+            <Button size="lg" className="bg-yellow-500 hover:bg-yellow-600 text-blue-900 w-full sm:w-auto">
               <Link to="/apply-doctorate" className="flex items-center gap-2">
-                <Award className="h-5 w-5" />
-                Apply for Doctorate
+                <Award className="h-4 w-4 md:h-5 md:w-5" />
+                <span className="text-sm md:text-base">{t('nav.apply_doctorate')}</span>
               </Link>
             </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-blue-900">
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="border-white text-white hover:bg-white hover:text-blue-900 w-full sm:w-auto"
+            >
               <Link to="/membership" className="flex items-center gap-2">
-                <Users className="h-5 w-5" />
-                Become a Member
+                <Users className="h-4 w-4 md:h-5 md:w-5" />
+                <span className="text-sm md:text-base">{t('hero.become_member')}</span>
               </Link>
             </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-blue-900">
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="border-white text-white hover:bg-white hover:text-blue-900 w-full sm:w-auto"
+            >
               <Link to="/donate" className="flex items-center gap-2">
-                <Home className="h-5 w-5" />
-                Support Our Cause
+                <Home className="h-4 w-4 md:h-5 md:w-5" />
+                <span className="text-sm md:text-base">{t('hero.support_cause')}</span>
               </Link>
             </Button>
           </div>
@@ -121,59 +73,67 @@ const Index = () => {
       {/* Partners Section */}
       <PartnersSection />
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
+      {/* Footer - Enhanced Responsiveness */}
+      <footer className="bg-gray-900 text-white py-8 md:py-12">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+            <div className="sm:col-span-2 lg:col-span-1">
               <div className="flex items-center space-x-2 mb-4">
                 <img src="/placeholder.svg" alt="NHGPF Logo" className="h-8 w-8" />
                 <h3 className="font-bold text-lg">NHGPF</h3>
               </div>
-              <p className="text-gray-300 mb-4">
+              <p className="text-gray-300 mb-4 text-sm md:text-base leading-relaxed">
                 National Humanity Global Peace Federation working towards global peace 
                 through police-public cooperation and humanitarian services.
               </p>
               <div className="flex space-x-3">
-                <a href="#" className="text-gray-300 hover:text-yellow-400"><Users className="h-5 w-5" /></a>
-                <a href="#" className="text-gray-300 hover:text-yellow-400"><Mail className="h-5 w-5" /></a>
-                <a href="#" className="text-gray-300 hover:text-yellow-400"><Calendar className="h-5 w-5" /></a>
+                <a href="#" className="text-gray-300 hover:text-yellow-400 transition-colors">
+                  <Users className="h-5 w-5" />
+                </a>
+                <a href="#" className="text-gray-300 hover:text-yellow-400 transition-colors">
+                  <Award className="h-5 w-5" />
+                </a>
+                <a href="#" className="text-gray-300 hover:text-yellow-400 transition-colors">
+                  <Home className="h-5 w-5" />
+                </a>
               </div>
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4">Quick Links</h4>
+              <h4 className="font-semibold mb-4 text-base md:text-lg">Quick Links</h4>
               <ul className="space-y-2 text-gray-300">
-                <li><Link to="/about" className="hover:text-yellow-400">About Us</Link></li>
-                <li><Link to="/events" className="hover:text-yellow-400">Events</Link></li>
-                <li><Link to="/gallery" className="hover:text-yellow-400">Gallery</Link></li>
-                <li><Link to="/contact" className="hover:text-yellow-400">Contact</Link></li>
+                <li><Link to="/about" className="hover:text-yellow-400 transition-colors text-sm md:text-base">About Us</Link></li>
+                <li><Link to="/events" className="hover:text-yellow-400 transition-colors text-sm md:text-base">Events</Link></li>
+                <li><Link to="/gallery" className="hover:text-yellow-400 transition-colors text-sm md:text-base">Gallery</Link></li>
+                <li><Link to="/contact" className="hover:text-yellow-400 transition-colors text-sm md:text-base">Contact</Link></li>
               </ul>
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4">Programs</h4>
+              <h4 className="font-semibold mb-4 text-base md:text-lg">Programs</h4>
               <ul className="space-y-2 text-gray-300">
-                <li><Link to="/doctorate-holders" className="hover:text-yellow-400">Doctorate Program</Link></li>
-                <li><Link to="/awardees" className="hover:text-yellow-400">Awards</Link></li>
-                <li><Link to="/ppr" className="hover:text-yellow-400">Police Public Relations</Link></li>
-                <li><Link to="/women-empowerment" className="hover:text-yellow-400">Women Empowerment</Link></li>
+                <li><Link to="/doctorate-holders" className="hover:text-yellow-400 transition-colors text-sm md:text-base">Doctorate Program</Link></li>
+                <li><Link to="/awardees" className="hover:text-yellow-400 transition-colors text-sm md:text-base">Awards</Link></li>
+                <li><Link to="/ppr" className="hover:text-yellow-400 transition-colors text-sm md:text-base">Police Public Relations</Link></li>
+                <li><Link to="/women-empowerment" className="hover:text-yellow-400 transition-colors text-sm md:text-base">Women Empowerment</Link></li>
               </ul>
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4">Contact Info</h4>
-              <div className="text-gray-300 space-y-2">
-                <p>📧 info@nhgpf.org</p>
+              <h4 className="font-semibold mb-4 text-base md:text-lg">Contact Info</h4>
+              <div className="text-gray-300 space-y-2 text-sm md:text-base">
+                <p className="break-all">📧 info@nhgpf.org</p>
                 <p>📞 +91 XXXX XXXX XX</p>
-                <p>📍 Your Address Here</p>
-                <p>🌐 www.nhgpf.org</p>
+                <p className="break-words">📍 Your Address Here</p>
+                <p className="break-all">🌐 www.nhgpf.org</p>
               </div>
             </div>
           </div>
           
-          <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">
-            <p>&copy; 2024 National Humanity Global Peace Federation. All rights reserved.</p>
+          <div className="border-t border-gray-700 mt-6 md:mt-8 pt-6 md:pt-8 text-center text-gray-300">
+            <p className="text-sm md:text-base">
+              &copy; 2024 National Humanity Global Peace Federation. All rights reserved.
+            </p>
           </div>
         </div>
       </footer>
